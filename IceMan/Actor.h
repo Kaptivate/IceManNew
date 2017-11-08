@@ -4,12 +4,11 @@
 #include "GraphObject.h"
 
 class StudentWorld;
-class Iceman;
 
 // Students:  Add code to this file, Actor.cpp, StudentWorld.h, and StudentWorld.cpp
 class Actor : public GraphObject
 {
-	bool isAlive = true;
+	bool isAlive;
 
 public:
 	StudentWorld* myWorld = nullptr;
@@ -23,11 +22,11 @@ public:
 		isAlive = false;
 	}
 
-	Actor(int x, int y, int ID, Direction dir, double s, unsigned int d, StudentWorld *stu) :GraphObject(ID, x, y, dir, s, d), myWorld(stu) {
+	Actor(int x, int y, int ID, Direction dir, double s, unsigned int d, StudentWorld *stu) :GraphObject(ID, x, y, dir, s, d), myWorld(stu), isAlive(true) {
 		setVisible(true);
 	}
 	StudentWorld *getStudentWorld();
-	 
+
 	virtual void doSomething() = 0;
 
 	virtual ~Actor() {};

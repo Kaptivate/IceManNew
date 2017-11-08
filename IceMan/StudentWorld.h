@@ -10,13 +10,13 @@
 #include <sstream>
 
 // Students:  Add code to this file, StudentWorld.cpp, Actor.h, and Actor.cpp
-const size_t MAX_X = 60;
+const size_t MAX_X = 64;
 const size_t MAX_Y = 60;
 class StudentWorld : public GameWorld
 {
-	
+
 public:
-	StudentWorld(std::string assetDir): GameWorld(assetDir) {}
+	StudentWorld(std::string assetDir) : GameWorld(assetDir) {}
 
 	virtual int init()
 	{
@@ -27,8 +27,7 @@ public:
 		playerSonar = 1;
 		playerScore = 0;
 
-		std::shared_ptr<Actor> im(new Iceman(30, 60, this));
-		VActors.push_back(im);
+		IceM = std::shared_ptr<Actor>(new Iceman(30, 60, this));
 
 		for (size_t i = 0; i < MAX_Y; i++)
 		{
@@ -52,9 +51,9 @@ public:
 	{
 		updateDisplayText();
 		setPlayerPos();
+		IceM->doSomething();
 		for (size_t i = 0; i < VActors.size(); i++)
 		{
-			
 			if (VActors[i]->getAlive())
 			{
 				VActors[i]->doSomething();
@@ -82,7 +81,7 @@ public:
 			decLives();
 			return GWSTATUS_PLAYER_DIED;
 		}
-		 
+
 		if (completelevel())
 		{
 			//COMPLETED LEVEL SOUNDEFFECT
@@ -97,12 +96,22 @@ public:
 		for (size_t i = 0; i < VActors.size(); i++)
 		{
 			VActors[i].reset();
+			IceM.reset();
 		}
 	}
 
+
+	virtual ~StudentWorld()
+	{
+		for (size_t i = 0; i < VActors.size(); i++)
+		{
+			VActors[i].reset();
+			IceM.reset();
+		}
+	};
 private:
 	std::vector<std::shared_ptr<Actor>> VActors;
-
+	std::shared_ptr<Actor> IceM;
 	int playerHP;
 	int playerAmmo;
 	int playerGold;
@@ -175,9 +184,11 @@ private:
 
 public:
 	void setPlayerPos() {
-		playerX = VActors[0]->getX();
-		playerY = VActors[0]->getY();
+		playerX = IceM->getX();
+		playerY = IceM->getY();
 	}
+
+
 	void decAmmo()
 	{
 		playerAmmo--;
