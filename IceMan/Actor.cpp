@@ -7,7 +7,7 @@ StudentWorld* Actor::getStudentWorld()
 {
 	return myWorld;
 }
-
+ 
 void Iceman::doSomething() {
 
 	/*MOVEMENT KEYS*/

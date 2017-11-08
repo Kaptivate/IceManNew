@@ -27,7 +27,7 @@ public:
 		setVisible(true);
 	}
 	StudentWorld *getStudentWorld();
-
+	 
 	virtual void doSomething() = 0;
 
 	virtual ~Actor() {};

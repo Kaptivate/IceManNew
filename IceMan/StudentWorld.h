@@ -82,7 +82,7 @@ public:
 			decLives();
 			return GWSTATUS_PLAYER_DIED;
 		}
-
+		 
 		if (completelevel())
 		{
 			//COMPLETED LEVEL SOUNDEFFECT
