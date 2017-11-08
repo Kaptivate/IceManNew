@@ -88,7 +88,7 @@ public:
 			return GWSTATUS_FINISHED_LEVEL;
 		}
 
-		return GWSTATUS_CONTINUE_GAME;
+		return GWSTATUS_CONTINUE_GAME; 
 	}
 
 	virtual void cleanUp()
